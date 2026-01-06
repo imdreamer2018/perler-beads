@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  perler-beads:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: perler-beads-app
+    restart: unless-stopped
+    ports:
+      - "30016:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+

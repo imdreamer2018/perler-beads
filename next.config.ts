@@ -23,6 +23,7 @@ const withPWA = require("next-pwa")({
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: 'standalone', // Docker 部署支持
 };
 
 export default withPWA(nextConfig);
